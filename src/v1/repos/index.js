@@ -9,13 +9,13 @@ export default class Repos {
   }
 
   fork(accountName: string, repoSlug: string) {
-    this.client.post(
+    return this.client.post(
       Endpoints.v1.repos.fork(accountName, repoSlug),
     )
   }
 
   getMainBranch(accountName: string, repoSlug: string) {
-    this.client.get(
+    return this.client.get(
       Endpoints.v1.repos.branch.mainBranch(accountName, repoSlug)
     )
   }

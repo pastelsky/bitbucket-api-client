@@ -7,7 +7,7 @@ export default  class Invitations{
   }
 
   send(accountName: string, repoSlug: string, email: string, permission: "read" | "write" | "admin") {
-    this.client.post(
+    return this.client.post(
       Endpoints.v1.invitations(accountName, repoSlug, email),
       { data: { perm: permission } }
     )

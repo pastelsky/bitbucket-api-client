@@ -163,37 +163,37 @@ var Privileges = function () {
   createClass(Privileges, [{
     key: "getForAccount",
     value: function getForAccount(accountName, options) {
-      this.client.get(Endpoints.v1.privileges.byAccount(accountName), { data: options });
+      return this.client.get(Endpoints.v1.privileges.byAccount(accountName), { data: options });
     }
   }, {
     key: "getForRepo",
     value: function getForRepo(accountName, repoSlug, options) {
-      this.client.get(Endpoints.v1.privileges.byRepo(accountName, repoSlug), { data: options });
+      return this.client.get(Endpoints.v1.privileges.byRepo(accountName, repoSlug), { data: options });
     }
   }, {
     key: "getForIndividual",
     value: function getForIndividual(accountName, repoSlug, privilegeAccount) {
-      this.client.get(Endpoints.v1.privileges.byIndividual(accountName, repoSlug));
+      return this.client.get(Endpoints.v1.privileges.byIndividual(accountName, repoSlug));
     }
   }, {
     key: "grantToIndividual",
     value: function grantToIndividual(accountName, repoSlug, privilegeAccount, privilege) {
-      this.client.put(Endpoints.v1.privileges.byIndividual(accountName, repoSlug), { data: { privilege: privilege } });
+      return this.client.put(Endpoints.v1.privileges.byIndividual(accountName, repoSlug), { data: { privilege: privilege } });
     }
   }, {
     key: "revokeFromIndividual",
     value: function revokeFromIndividual(accountName, repoSlug, privilegeAccount) {
-      this.client.delete(Endpoints.v1.privileges.byIndividual(accountName, repoSlug));
+      return this.client.delete(Endpoints.v1.privileges.byIndividual(accountName, repoSlug));
     }
   }, {
     key: "revokeAllFromRepo",
     value: function revokeAllFromRepo(accountName, repoSlug) {
-      this.client.delete(Endpoints.v1.privileges.byRepo(accountName, repoSlug));
+      return this.client.delete(Endpoints.v1.privileges.byRepo(accountName, repoSlug));
     }
   }, {
     key: "revokeAllFromAccount",
     value: function revokeAllFromAccount(accountName) {
-      this.client.delete(Endpoints.v1.privileges.byAccount(accountName));
+      return this.client.delete(Endpoints.v1.privileges.byAccount(accountName));
     }
   }]);
   return Privileges;
@@ -214,42 +214,42 @@ var Groups = function () {
             groupSlug = _ref.groupSlug;
         return 'group=' + ownerName + '/' + groupSlug;
       }).join('&');
-      this.client.get(Endpoints.v1.groups.all + '?' + options);
+      return this.client.get(Endpoints.v1.groups.all + '?' + options);
     }
   }, {
     key: 'getForAccount',
     value: function getForAccount(accountName) {
-      this.client.get(Endpoints.v1.groups.byAccount(accountName));
+      return this.client.get(Endpoints.v1.groups.byAccount(accountName));
     }
   }, {
     key: 'create',
     value: function create(accountName, groupName) {
-      this.client.post(Endpoints.v1.groups.byAccount(accountName), { data: { name: groupName } });
+      return this.client.post(Endpoints.v1.groups.byAccount(accountName), { data: { name: groupName } });
     }
   }, {
     key: 'update',
     value: function update(accountName, groupSlug, options) {
-      this.client.put(Endpoints.v1.groups.byGroup(accountName, groupSlug), { data: _extends({ group_slug: groupSlug }, options) });
+      return this.client.put(Endpoints.v1.groups.byGroup(accountName, groupSlug), { data: _extends({ group_slug: groupSlug }, options) });
     }
   }, {
     key: 'delete',
     value: function _delete(accountName, groupSlug) {
-      this.client.delete(Endpoints.v1.groups.byGroup(accountName, groupSlug));
+      return this.client.delete(Endpoints.v1.groups.byGroup(accountName, groupSlug));
     }
   }, {
     key: 'getMembers',
     value: function getMembers(accountName, groupSlug) {
-      this.client.get(Endpoints.v1.groups.members(accountName, groupSlug));
+      return this.client.get(Endpoints.v1.groups.members(accountName, groupSlug));
     }
   }, {
     key: 'addMember',
     value: function addMember(accountName, groupSlug, memberName) {
-      this.client.put(Endpoints.v1.groups.member(accountName, groupSlug, memberName));
+      return this.client.put(Endpoints.v1.groups.member(accountName, groupSlug, memberName));
     }
   }, {
     key: 'deleteMember',
     value: function deleteMember(accountName, groupSlug, memberName) {
-      this.client.delete(Endpoints.v1.groups.member(accountName, groupSlug, memberName));
+      return this.client.delete(Endpoints.v1.groups.member(accountName, groupSlug, memberName));
     }
   }]);
   return Groups;
@@ -265,7 +265,7 @@ var Invitations = function () {
   createClass(Invitations, [{
     key: "send",
     value: function send(accountName, repoSlug, email, permission) {
-      this.client.post(Endpoints.v1.invitations(accountName, repoSlug, email), { data: { perm: permission } });
+      return this.client.post(Endpoints.v1.invitations(accountName, repoSlug, email), { data: { perm: permission } });
     }
   }]);
   return Invitations;
@@ -281,42 +281,42 @@ var PullRequests = function () {
   createClass(PullRequests, [{
     key: "get",
     value: function get$$1(accountName, repoSlug, pullRequestId) {
-      this.client.get(Endpoints.v2.repos.pullRequests.byId(accountName, repoSlug, pullRequestId));
+      return this.client.get(Endpoints.v2.repos.pullRequests.byId(accountName, repoSlug, pullRequestId));
     }
   }, {
     key: "getAll",
     value: function getAll(accountName, repoSlug, options) {
-      this.client.get(Endpoints.v2.repos.pullRequests.all(accountName, repoSlug), { data: options });
+      return this.client.get(Endpoints.v2.repos.pullRequests.all(accountName, repoSlug), { data: options });
     }
   }, {
     key: "getComment",
     value: function getComment(accountName, repoSlug, pullRequestId, commentId) {
-      this.client.get(Endpoints.v2.repos.pullRequests.comments.byId(accountName, repoSlug, pullRequestId, commentId));
+      return this.client.get(Endpoints.v2.repos.pullRequests.comments.byId(accountName, repoSlug, pullRequestId, commentId));
     }
   }, {
     key: "getAllComments",
     value: function getAllComments(accountName, repoSlug, pullRequestId) {
-      this.client.get(Endpoints.v2.repos.pullRequests.comments.all(accountName, repoSlug, pullRequestId));
+      return this.client.get(Endpoints.v2.repos.pullRequests.comments.all(accountName, repoSlug, pullRequestId));
     }
   }, {
     key: "postComment",
-    value: function postComment(accountName, repoSlug, pullRequestId) {
-      this.client.post(Endpoints.v1.repos.pullRequests.comments.all(accountName, repoSlug, pullRequestId));
+    value: function postComment(accountName, repoSlug, pullRequestId, content) {
+      return this.client.post(Endpoints.v1.repos.pullRequests.comments.all(accountName, repoSlug, pullRequestId), { data: { content: content } });
     }
   }, {
     key: "updateComment",
-    value: function updateComment(accountName, repoSlug, pullRequestId, commentId) {
-      this.client.put(Endpoints.v1.repos.pullRequests.comments.byId(accountName, repoSlug, pullRequestId, commentId));
+    value: function updateComment(accountName, repoSlug, pullRequestId, commentId, content) {
+      return this.client.put(Endpoints.v1.repos.pullRequests.comments.byId(accountName, repoSlug, pullRequestId, commentId), { data: { content: content } });
     }
   }, {
     key: "deleteComment",
     value: function deleteComment(accountName, repoSlug, pullRequestId, commentId) {
-      this.client.delete(Endpoints.v1.repos.pullRequests.comments.byId(accountName, repoSlug, pullRequestId, commentId));
+      return this.client.delete(Endpoints.v1.repos.pullRequests.comments.byId(accountName, repoSlug, pullRequestId, commentId));
     }
   }, {
     key: "toggleCommentSpamFlag",
     value: function toggleCommentSpamFlag(accountName, repoSlug, pullRequestId, commentId) {
-      this.client.put(Endpoints.v1.repos.pullRequests.comments.spamFlag(accountName, repoSlug, pullRequestId, commentId));
+      return this.client.put(Endpoints.v1.repos.pullRequests.comments.spamFlag(accountName, repoSlug, pullRequestId, commentId));
     }
   }]);
   return PullRequests;
@@ -333,12 +333,12 @@ var Repos = function () {
   createClass(Repos, [{
     key: 'fork',
     value: function fork(accountName, repoSlug) {
-      this.client.post(Endpoints.v1.repos.fork(accountName, repoSlug));
+      return this.client.post(Endpoints.v1.repos.fork(accountName, repoSlug));
     }
   }, {
     key: 'getMainBranch',
     value: function getMainBranch(accountName, repoSlug) {
-      this.client.get(Endpoints.v1.repos.branch.mainBranch(accountName, repoSlug));
+      return this.client.get(Endpoints.v1.repos.branch.mainBranch(accountName, repoSlug));
     }
   }, {
     key: 'getRawSource',
@@ -357,22 +357,22 @@ var Users = function () {
   createClass(Users, [{
     key: 'getProfile',
     value: function getProfile(accountNameOrEmail) {
-      this.client.get(Endpoints.v1.users.byId(accountNameOrEmail));
+      return this.client.get(Endpoints.v1.users.byId(accountNameOrEmail));
     }
   }, {
     key: 'getFollowers',
     value: function getFollowers(accountNameOrEmail) {
-      this.client.get(Endpoints.v1.users.followers(accountNameOrEmail));
+      return this.client.get(Endpoints.v1.users.followers(accountNameOrEmail));
     }
   }, {
     key: 'getPlan',
     value: function getPlan(accountNameOrEmail) {
-      this.client.get(Endpoints.v1.users.plan(accountNameOrEmail));
+      return this.client.get(Endpoints.v1.users.plan(accountNameOrEmail));
     }
   }, {
     key: 'getEvents',
     value: function getEvents(accountNameOrEmail) {
-      this.client.get(Endpoints.v1.users.events(accountNameOrEmail));
+      return this.client.get(Endpoints.v1.users.events(accountNameOrEmail));
     }
   }]);
   return Users;
